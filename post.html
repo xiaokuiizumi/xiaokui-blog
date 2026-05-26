@@ -123,13 +123,15 @@
             const raw = localStorage.getItem(STORAGE_KEY);
             if (raw) {
                 const list = JSON.parse(raw);
-                const existingTitles = new Set(list.map(p => p.title));
+                const defaultTitles = new Set(DEFAULT_POSTS.map(p => p.title));
+                const filtered = list.filter(p => defaultTitles.has(p.title));
+                const existingTitles = new Set(filtered.map(p => p.title));
                 const missing = DEFAULT_POSTS.filter(p => !existingTitles.has(p.title));
-                if (missing.length) {
-                    list.unshift(...missing);
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                if (missing.length || filtered.length !== list.length) {
+                    filtered.unshift(...missing);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
                 }
-                return list;
+                return filtered;
             }
             localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
             return [...DEFAULT_POSTS];
