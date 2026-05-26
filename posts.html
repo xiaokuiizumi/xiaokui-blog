@@ -98,12 +98,22 @@
     <script>
         const STORAGE_KEY = 'xiaokui_posts_static';
         const DEFAULT_POSTS = [
-            { title: '欢迎来到小葵的博客', content: '这是我的第一篇博客！\n\n以后会在这里分享 **技术笔记**、**追番感想** 和生活日常～\n\n请多指教 ✨', tag: '生活', mood: '😊', date: '2026-05-26' }
+            { title: '欢迎来到小葵的博客', content: '这是我的第一篇博客！\n\n以后会在这里分享 **技术笔记**、**追番感想** 和生活日常～\n\n请多指教 ✨', tag: '生活', mood: '😊', date: '2026-05-26' },
+            { title: '重温《轻音少女！》剧场版', content: '周末又重温了一遍 **轻音少女 剧场版**，还是那么好看啊！\n\n不得不说京阿尼在细节和情感刻画上真的太强了。从伦敦到日本，每一个场景都充满了温馨和感动。\n\n**最喜欢的片段：**\n\n- 大家在伦敦街头演奏"Angels"的桥段，路人从驻足到加入，那种音乐带来的感染力真的太棒了\n- 梓喵在机场送别时强忍泪水的表情，每次看到都会鼻子一酸\n- 结尾那首"相遇天使"，简直就是给所有热爱K-ON!的人的一封情书\n\n> 青春就是和朋友们一起做喜欢的事，然后笑着说再见。\n\n看完之后又想去练吉他了 🎸\n\n不知道什么时候能再看到她们的新故事呢…', tag: '追番感想', mood: '🥰', date: '2026-05-26' }
         ];
 
         function getPosts() {
             const raw = localStorage.getItem(STORAGE_KEY);
-            if (raw) return JSON.parse(raw);
+            if (raw) {
+                const list = JSON.parse(raw);
+                const existingTitles = new Set(list.map(p => p.title));
+                const missing = DEFAULT_POSTS.filter(p => !existingTitles.has(p.title));
+                if (missing.length) {
+                    list.unshift(...missing);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+                }
+                return list;
+            }
             localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
             return [...DEFAULT_POSTS];
         }
