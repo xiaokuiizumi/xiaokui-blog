@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
-            background: #f8fafc; color: #1e293b; line-height: 1.8;
+            background: #f8fafc; color: #1e293b; line-height: 1.8; padding-top: 45px;
         }
         header {
             background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
@@ -18,6 +18,17 @@
             content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
             background: #f8fafc; border-radius: 50% 50% 0 0;
         }
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .top-nav .nav-links {
+            max-width: 720px; margin: 0 auto; display: flex; justify-content: center;
+            gap: 32px; padding: 12px 24px; font-size: 14px;
+        }
+        .top-nav .nav-links a { color: #64748b; text-decoration: none; transition: color 0.2s; font-weight: 500; }
+        .top-nav .nav-links a:hover { color: #0ea5e9; }
         .avatar {
             width: 96px; height: 96px; border-radius: 50%;
             background: linear-gradient(135deg, #0ea5e9, #3b82f6);
@@ -27,9 +38,6 @@
         }
         header h1 { font-size: 36px; font-weight: 800; color: #1e293b; letter-spacing: -0.5px; }
         header .bio { color: #64748b; font-size: 16px; margin-top: 8px; }
-        .nav-links { margin-top: 20px; display: flex; justify-content: center; gap: 24px; font-size: 14px; flex-wrap: wrap; }
-        .nav-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
-        .nav-links a:hover { color: #0ea5e9; }
         .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
         .intro {
             background: #fff; border-radius: 16px; padding: 28px 32px;
@@ -73,21 +81,23 @@
             header h1 { font-size: 28px; }
             .intro, .about, .giscus-section { padding: 20px; }
             .about-grid { grid-template-columns: 1fr; }
-            .nav-links { gap: 16px; }
+            .top-nav .nav-links { gap: 20px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="avatar">🌻</div>
-        <h1>小葵</h1>
-        <p class="bio">二次元爱好者 / 追番中的小葵 🌻</p>
+    <div class="top-nav">
         <div class="nav-links">
             <a href="posts.html">📝 文章</a>
             <a href="anime.html">🎬 追番</a>
             <a href="#">📖 关于</a>
             <a href="https://github.com/xiaokuiizumi" target="_blank">🐙 GitHub</a>
         </div>
+    </div>
+    <header>
+        <div class="avatar">🌻</div>
+        <h1>小葵</h1>
+        <p class="bio">二次元爱好者 / 追番中的小葵 🌻</p>
     </header>
 
     <div class="container">
