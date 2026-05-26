@@ -106,10 +106,10 @@
     <script>
         const STORAGE_KEY = 'xiaokui_anime_static';
         const DEFAULT_ANIME = [
-            { name:'幸运星', origin:'2007 · 京都动画', comment:'最喜欢的日常番！此方就是我的灵魂导师～', status:'done', rating:5, color:'fce4ec,f8bbd0', icon:'⭐', cover:null },
-            { name:'轻音少女', origin:'2009 2010 · 京都动画', comment:'青春少女乐队题材最高的山', status:'done', rating:5, color:'fef3c7,fde68a', icon:'🎸', cover:null },
-            { name:'孤独摇滚！', origin:'2022 · CloverWorks', comment:'喜欢波奇酱和虹夏，无需多言', status:'done', rating:5, color:'fce7f3,fbcfe8', icon:'☕', cover:null },
-            { name:'埃罗芒阿老师', origin:'2017 · A-1Pictures', comment:'第一次看的时候觉得一般，但是看完小说原作后还是决定给个四星', status:'done', rating:4, color:'fce4ec,f8bbd0', icon:'🦋', cover:null },
+            { name:'幸运星', origin:'2007 · 京都动画', comment:'最喜欢的日常番！此方就是我的灵魂导师～', status:'done', rating:5, color:'fce4ec,f8bbd0', icon:'⭐', cover:'img/luckystar.png' },
+            { name:'轻音少女', origin:'2009 2010 · 京都动画', comment:'青春少女乐队题材最高的山', status:'done', rating:5, color:'fef3c7,fde68a', icon:'🎸', cover:'img/kon.jpg' },
+            { name:'孤独摇滚！', origin:'2022 · CloverWorks', comment:'喜欢波奇酱和虹夏，无需多言', status:'done', rating:5, color:'fce7f3,fbcfe8', icon:'☕', cover:'img/bochi.jpg' },
+            { name:'埃罗芒阿老师', origin:'2017 · A-1Pictures', comment:'第一次看的时候觉得一般，但是看完小说原作后还是决定给个四星', status:'done', rating:4, color:'fce4ec,f8bbd0', icon:'🦋', cover:'img/eromanga.jpg' },
         ];
         const STATUS_MAP = { done:'已追完', watching:'追剧中', paused:'搁置中' };
         function renderStars(r) { const full=Math.floor(r); const half=r%1>=0.5; return '⭐'.repeat(full)+(half?'½':''); }
