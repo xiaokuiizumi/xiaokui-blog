@@ -30,91 +30,44 @@
             content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
             background: #f8fafc; border-radius: 50% 50% 0 0;
         }
+        header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
+        header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        .toolbar { margin: 24px 0 20px; }
+        .toolbar .count { font-size: 14px; color: #64748b; }
+        .toolbar .count strong { color: #0ea5e9; }
+
+        .post-card {
+            background: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 16px;
+            border: 1px solid #f1f5f9;
+        }
+        .post-card:hover { border-color: #bae6fd; box-shadow: 0 4px 20px rgba(14,165,233,0.08); }
+        .post-mood { font-size: 28px; margin-bottom: 8px; }
+        .post-meta { font-size: 13px; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .post-meta .tag {
+            display: inline-block; background: #e0f2fe; color: #0ea5e9;
+            font-size: 12px; padding: 2px 10px; border-radius: 99px;
+        }
+        .post-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .post-card h3 a { color: #1e293b; text-decoration: none; }
+        .post-card h3 a:hover { color: #0ea5e9; }
+        .post-summary { font-size: 14px; color: #64748b; line-height: 1.7; }
+        .post-summary .read-more { color: #0ea5e9; font-weight: 600; text-decoration: none; white-space: nowrap; }
+        .post-summary .read-more:hover { text-decoration: underline; }
+
+        .empty-state { text-align: center; padding: 64px 24px; color: #94a3b8; }
+        .empty-state .icon { font-size: 56px; margin-bottom: 16px; }
+
+        footer { text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px; }
+        footer a { color: #0ea5e9; text-decoration: none; }
+
         @media (max-width: 600px) {
             header { padding: 40px 16px 32px; }
             header h1 { font-size: 24px; }
             .top-nav .nav-links { gap: 20px; font-size: 13px; }
             .post-card { padding: 20px; }
-            .form-row { flex-direction: column; gap: 0; }
-            .modal { padding: 24px; }
         }
-        header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
-        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-
-        .toolbar { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 20px; flex-wrap: wrap; gap: 12px; }
-        .toolbar .count { font-size: 14px; color: #64748b; }
-        .toolbar .count strong { color: #0ea5e9; }
-        .btn-add {
-            display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px;
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; border: none;
-            border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
-        }
-        .btn-add:hover { box-shadow: 0 4px 16px rgba(14,165,233,0.35); }
-        .btn-add.hidden { display: none; }
-
-        .post-card {
-            background: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 16px;
-            border: 1px solid #f1f5f9; position: relative;
-        }
-        .post-card:hover { border-color: #bae6fd; box-shadow: 0 4px 20px rgba(14,165,233,0.08); }
-        .post-card .card-actions {
-            position: absolute; top: 12px; right: 14px; display: flex; gap: 6px;
-            opacity: 0; transition: opacity 0.2s;
-        }
-        .post-card:hover .card-actions { opacity: 1; }
-        .post-card .card-actions button {
-            width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
-            font-size: 14px; background: rgba(0,0,0,0.35); color: #fff;
-            backdrop-filter: blur(4px);
-        }
-        .post-card .card-actions .edit-action:hover { background: rgba(14,165,233,0.85); }
-        .post-card .card-actions .delete-action:hover { background: rgba(239,68,68,0.85); }
-        .post-card .card-actions.hidden { display: none; }
-        .post-mood { font-size: 28px; margin-bottom: 8px; }
-        .post-meta { font-size: 13px; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .post-meta .tag {
-            display: inline-block; background: #e0f2fe; color: #0ea5e9;
-            font-size: 12px; padding: 2px 10px; border-radius: 99px;
-        }
-        .post-card h3 { font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-        .post-content { font-size: 14px; color: #475569; line-height: 1.85; }
-        .post-content h1,.post-content h2,.post-content h3 { margin: 20px 0 10px; color: #1e293b; font-weight: 700; }
-        .post-content h1 { font-size: 20px; } .post-content h2 { font-size: 18px; } .post-content h3 { font-size: 16px; }
-        .post-content p { margin-bottom: 12px; }
-        .post-content ul,.post-content ol { margin: 8px 0 12px; padding-left: 24px; }
-        .post-content li { margin-bottom: 4px; }
-        .post-content code { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-size: 13px; font-family: "SF Mono","Fira Code","Consolas",monospace; color: #0ea5e9; }
-        .post-content pre { background: #1e293b; color: #e2e8f0; padding: 16px 20px; border-radius: 12px; overflow-x: auto; margin: 16px 0; font-size: 13px; }
-        .post-content pre code { background: none; padding: 0; color: inherit; }
-        .post-content blockquote { border-left: 4px solid #bae6fd; padding: 8px 16px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; color: #64748b; }
-        .post-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 24px 0; }
-        .post-content strong { color: #1e293b; font-weight: 700; }
-
-        .empty-state { text-align: center; padding: 64px 24px; color: #94a3b8; }
-        .empty-state .icon { font-size: 56px; margin-bottom: 16px; }
-
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
-        .modal-overlay.open { display: flex; }
-        .modal { background: #fff; border-radius: 20px; padding: 32px; width: 100%; max-width: 540px; box-shadow: 0 24px 80px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
-        .modal h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #1e293b; }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
-        .form-group input,.form-group select,.form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; color: #1e293b; background: #fff; }
-        .form-group input:focus,.form-group select:focus,.form-group textarea:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .form-row { display: flex; gap: 14px; }
-        .form-row .form-group { flex: 1; }
-        .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
-        .modal-actions button { flex: 1; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
-        .modal-actions .btn-cancel { background: #f1f5f9; color: #64748b; }
-        .modal-actions .btn-submit { background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; }
-
-        footer { text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px; }
-        footer a { color: #0ea5e9; text-decoration: none; }
-        .admin-bar { margin-top: 6px; font-size: 12px; }
-        .admin-bar a { color: #94a3b8; text-decoration: none; }
-        .admin-bar a:hover { color: #0ea5e9; }
-
     </style>
 </head>
 <body>
@@ -134,65 +87,19 @@
     <div class="container">
         <div class="toolbar">
             <span class="count">共 <strong id="totalCount">0</strong> 篇</span>
-            <button class="btn-add hidden" id="btnAdd" onclick="openModal()">＋ 写新文章</button>
         </div>
         <div id="postList"><div class="empty-state"><div class="icon">📝</div><p>加载中…</p></div></div>
     </div>
 
-    <div class="modal-overlay" id="modal">
-        <div class="modal">
-            <h2 id="modalTitle">✏️ 写新文章</h2>
-            <div class="form-group">
-                <label>文章标题 *</label>
-                <input type="text" id="inputTitle" maxlength="60">
-            </div>
-            <div class="form-group">
-                <label>正文（支持 Markdown）</label>
-                <textarea id="inputContent"></textarea>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label>标签</label>
-                    <input type="text" id="inputTag" placeholder="例：CSS、生活" maxlength="20">
-                </div>
-                <div class="form-group">
-                    <label>心情</label>
-                    <select id="inputMood">
-                        <option value="😊">😊 开心</option>
-                        <option value="🤔">🤔 思考</option>
-                        <option value="💪">💪 加油</option>
-                        <option value="😴">😴 困了</option>
-                        <option value="🥰">🥰 好喜欢</option>
-                        <option value="🔥">🔥 燃起来了</option>
-                        <option value="☕">☕ 摸鱼</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>日期</label>
-                <input type="date" id="inputDate">
-            </div>
-            <div class="modal-actions">
-                <button class="btn-cancel" onclick="closeModal()">取消</button>
-                <button class="btn-submit" onclick="savePost()">发布</button>
-            </div>
-        </div>
-    </div>
-
     <footer>
         <p>© 2026 <a href="index.html">小葵的博客</a> · 共 <strong id="footerCount">0</strong> 篇</p>
-        <div class="admin-bar" id="adminBar"><a href="index.html">🏠 返回首页</a></div>
     </footer>
 
     <script>
-        const ADMIN_PASSWORD = '葵葵2026';
         const STORAGE_KEY = 'xiaokui_posts_static';
         const DEFAULT_POSTS = [
             { title: '欢迎来到小葵的博客', content: '这是我的第一篇博客！\n\n以后会在这里分享 **技术笔记**、**追番感想** 和生活日常～\n\n请多指教 ✨', tag: '生活', mood: '😊', date: '2026-05-26' }
         ];
-        let editingId = null;
-
-        function isAdmin() { return localStorage.getItem('xiaokui_admin') === 'true'; }
 
         function getPosts() {
             const raw = localStorage.getItem(STORAGE_KEY);
@@ -200,7 +107,8 @@
             localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
             return [...DEFAULT_POSTS];
         }
-        function savePosts(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+        function stripMarkdown(t) { return t.replace(/[#*_`~\[\]]/g,'').replace(/>\s/g,'').replace(/- /g,'').trim(); }
 
         function render() {
             const list = getPosts();
@@ -209,75 +117,23 @@
             document.getElementById('footerCount').textContent = list.length;
 
             if (list.length === 0) {
-                el.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>还没有文章，写一篇吧～</p></div>';
+                el.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>还没有文章～</p></div>';
                 return;
             }
-            const admin = isAdmin();
-            el.innerHTML = list.map((p, i) => `
-                <div class="post-card">
-                    <div class="card-actions ${admin ? '' : 'hidden'}">
-                        <button class="edit-action" onclick="editPost(${i})">✎</button>
-                        <button class="delete-action" onclick="deletePost(${i})">✕</button>
-                    </div>
+            el.innerHTML = list.map((p, i) => {
+                const plain = stripMarkdown(p.content||'');
+                const summary = plain.length > 150 ? plain.slice(0, 150) + '…' : plain;
+                return `<div class="post-card">
                     <div class="post-mood">${p.mood||'📝'}</div>
                     <div class="post-meta">${formatDate(p.date)}${p.tag ? '<span class="tag">'+escHtml(p.tag)+'</span>' : ''}</div>
-                    <h3>${escHtml(p.title)}</h3>
-                    <div class="post-content">${renderMarkdown(p.content||'')}</div>
-                </div>
-            `).join('');
+                    <h3><a href="post.html?id=${i}">${escHtml(p.title)}</a></h3>
+                    <div class="post-summary">${escHtml(summary)} <a href="post.html?id=${i}" class="read-more">阅读全文 →</a></div>
+                </div>`;
+            }).join('');
         }
 
         function formatDate(d) { if (!d) return ''; const p=d.split('-'); return p[0]+'.'+p[1]+'.'+p[2]; }
-        function renderMarkdown(t) { return typeof marked!=='undefined'&&marked.parse ? marked.parse(t,{breaks:true}) : t.replace(/\n/g,'<br>'); }
         function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-
-        function deletePost(i) {
-            if (!confirm('确定要删除吗？')) return;
-            const list = getPosts(); list.splice(i,1); savePosts(list); render();
-        }
-
-        function editPost(i) {
-            editingId = i;
-            const p = getPosts()[i];
-            document.getElementById('modalTitle').textContent = '✏️ 编辑文章';
-            document.querySelector('.btn-submit').textContent = '保存';
-            document.getElementById('inputTitle').value = p.title;
-            document.getElementById('inputContent').value = p.content||'';
-            document.getElementById('inputTag').value = p.tag||'';
-            document.getElementById('inputMood').value = p.mood||'😊';
-            document.getElementById('inputDate').value = p.date||'';
-            document.getElementById('modal').classList.add('open');
-        }
-
-        function openModal() {
-            editingId = null;
-            document.getElementById('modalTitle').textContent = '✏️ 写新文章';
-            document.querySelector('.btn-submit').textContent = '发布';
-            document.getElementById('inputTitle').value = '';
-            document.getElementById('inputContent').value = '';
-            document.getElementById('inputTag').value = '';
-            document.getElementById('inputMood').value = '😊';
-            document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
-            document.getElementById('modal').classList.add('open');
-        }
-
-        function closeModal() { document.getElementById('modal').classList.remove('open'); editingId=null; }
-
-        function savePost() {
-            const title = document.getElementById('inputTitle').value.trim();
-            if (!title) { alert('请输入标题'); return; }
-            const list = getPosts();
-            const data = { title, content: document.getElementById('inputContent').value.trim(), tag: document.getElementById('inputTag').value.trim(), mood: document.getElementById('inputMood').value, date: document.getElementById('inputDate').value };
-            if (editingId !== null) { list[editingId] = data; }
-            else { list.unshift(data); }
-            savePosts(list); closeModal(); render();
-        }
-
-        // 管理模式
-        if (isAdmin()) {
-            document.getElementById('btnAdd').classList.remove('hidden');
-            document.getElementById('adminBar').innerHTML = '<span style="color:#10b981">✅ 管理模式</span> <a href="index.html">🏠 返回首页</a>';
-        }
 
         render();
     </script>
