@@ -8,8 +8,19 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
-            background: #f8fafc; color: #1e293b; line-height: 1.8;
+            background: #f8fafc; color: #1e293b; line-height: 1.8; padding-top: 45px;
         }
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .top-nav .nav-links {
+            max-width: 880px; margin: 0 auto; display: flex; justify-content: center;
+            gap: 32px; padding: 12px 24px; font-size: 14px;
+        }
+        .top-nav .nav-links a { color: #64748b; text-decoration: none; transition: color 0.2s; font-weight: 500; }
+        .top-nav .nav-links a:hover { color: #0ea5e9; }
         header {
             background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
             padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden;
@@ -18,8 +29,6 @@
             content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
             background: #f8fafc; border-radius: 50% 50% 0 0;
         }
-        .back-link { position: absolute; left: 24px; top: 24px; font-size: 14px; color: #64748b; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.6); }
-        .back-link:hover { background: #fff; color: #0ea5e9; }
         header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
         header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
         .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
@@ -91,9 +100,9 @@
         .admin-bar a:hover { color: #0ea5e9; }
 
         @media (max-width: 600px) {
-            header { padding: 56px 16px 32px; }
+            header { padding: 40px 16px 32px; }
             header h1 { font-size: 24px; }
-            .back-link { left: 12px; top: 16px; font-size: 12px; }
+            .top-nav .nav-links { gap: 20px; font-size: 13px; }
             .anime-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
             .toolbar { flex-direction: column; align-items: stretch; }
             .modal { padding: 24px; }
@@ -101,8 +110,15 @@
     </style>
 </head>
 <body>
+    <div class="top-nav">
+        <div class="nav-links">
+            <a href="index.html">🏠 首页</a>
+            <a href="posts.html">📝 文章</a>
+            <a href="anime.html">🎬 追番</a>
+            <a href="about.html">📖 关于</a>
+        </div>
+    </div>
     <header>
-        <a href="index.html" class="back-link">← 返回博客</a>
         <h1>🎬 小葵的追番列表</h1>
         <p class="sub">记录每一部看过的动画 ✨</p>
     </header>

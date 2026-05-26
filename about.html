@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于小葵</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
+            background: #f8fafc; color: #1e293b; line-height: 1.8; padding-top: 45px;
+        }
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .top-nav .nav-links {
+            max-width: 720px; margin: 0 auto; display: flex; justify-content: center;
+            gap: 32px; padding: 12px 24px; font-size: 14px;
+        }
+        .top-nav .nav-links a { color: #64748b; text-decoration: none; transition: color 0.2s; font-weight: 500; }
+        .top-nav .nav-links a:hover { color: #0ea5e9; }
+        header {
+            background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
+            padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden;
+        }
+        header::after {
+            content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
+            background: #f8fafc; border-radius: 50% 50% 0 0;
+        }
+        .back-link { position: absolute; left: 24px; top: 24px; font-size: 14px; color: #64748b; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.6); }
+        .back-link:hover { background: #fff; color: #0ea5e9; }
+        header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
+        header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        .section { background: #fff; border-radius: 16px; padding: 28px 32px; margin: 24px 0; border: 1px solid #f1f5f9; }
+        .section-title { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 20px; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .about-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #f8fafc; border-radius: 10px; font-size: 14px; color: #475569; }
+        .about-item .icon { font-size: 20px; flex-shrink: 0; }
+
+        .platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .platform-card { display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 12px; border: 1px solid #f1f5f9; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .platform-card:hover { border-color: #bae6fd; box-shadow: 0 4px 16px rgba(14,165,233,0.1); transform: translateY(-2px); }
+        .platform-card .p-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+        .platform-card .p-info h4 { font-size: 15px; font-weight: 600; color: #1e293b; }
+        .platform-card .p-info p { font-size: 13px; color: #94a3b8; margin-top: 1px; }
+
+        footer { text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px; }
+        footer a { color: #0ea5e9; text-decoration: none; }
+
+        @media (max-width: 600px) {
+            header { padding: 40px 16px 32px; }
+            header h1 { font-size: 24px; }
+            .back-link { left: 12px; top: 16px; font-size: 12px; }
+            .section { padding: 20px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .platform-grid { grid-template-columns: 1fr; }
+            .top-nav .nav-links { gap: 20px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="nav-links">
+            <a href="index.html">🏠 首页</a>
+            <a href="posts.html">📝 文章</a>
+            <a href="anime.html">🎬 追番</a>
+            <a href="about.html">📖 关于</a>
+        </div>
+    </div>
+    <header>
+        <a href="index.html" class="back-link">← 返回博客</a>
+        <h1>🌻 关于小葵</h1>
+        <p class="sub">一个热爱二次元的自由人 ✨</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <div class="section-title">🙋 关于我</div>
+            <div class="about-grid">
+                <div class="about-item"><span class="icon">💼</span><span>自由职业 / 摸鱼中</span></div>
+                <div class="about-item"><span class="icon">🎨</span><span>资深二次元 / 追番狂魔</span></div>
+                <div class="about-item"><span class="icon">☕</span><span>咖啡因依赖患者</span></div>
+                <div class="about-item"><span class="icon">🐱</span><span>家里有两只猫 🐈🐈</span></div>
+                <div class="about-item"><span class="icon">📧</span><span>xiaokui@example.com</span></div>
+                <div class="about-item"><span class="icon">🌏</span><span>深圳 · 晴天</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🔗 在其他平台找到我</div>
+            <div class="platform-grid" id="platformGrid"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 <a href="index.html">小葵的博客</a> · Powered by 🌻</p>
+    </footer>
+
+    <script>
+        const PLATFORMS = [
+            { icon: '🐙', name: 'GitHub', desc: '代码仓库 & 开源项目', color: '#1e293b', url: 'https://github.com/xiaokuiizumi' },
+            { icon: '📺', name: 'Bilibili', desc: '追番 & 偶尔发视频', color: '#fb7299', url: 'https://space.bilibili.com/' },
+            { icon: '📕', name: '豆瓣', desc: '书影音记录', color: '#00b51d', url: 'https://www.douban.com/people/' },
+            { icon: '✍️', name: '知乎', desc: '写写回答和文章', color: '#0084ff', url: 'https://www.zhihu.com/people/' },
+            { icon: '🎵', name: '网易云音乐', desc: '听歌歌单', color: '#d43c33', url: '#' },
+            { icon: '🦊', name: 'Twitter / X', desc: '日常摸鱼 & 二次元', color: '#1da1f2', url: 'https://twitter.com/' },
+        ];
+
+        function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+        function renderPlatforms() {
+            const grid = document.getElementById('platformGrid');
+            grid.innerHTML = PLATFORMS.map(p => `
+                <a href="${escHtml(p.url)}" target="_blank" rel="noopener" class="platform-card">
+                    <div class="p-icon" style="background:${p.color}15; color:${p.color}">${p.icon}</div>
+                    <div class="p-info">
+                        <h4>${escHtml(p.name)}</h4>
+                        <p>${escHtml(p.desc)}</p>
+                    </div>
+                </a>
+            `).join('');
+        }
+        renderPlatforms();
+    </script>
+</body>
+</html>
