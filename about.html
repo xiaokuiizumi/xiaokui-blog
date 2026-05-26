@@ -29,8 +29,6 @@
             content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
             background: #f8fafc; border-radius: 50% 50% 0 0;
         }
-        .back-link { position: absolute; left: 24px; top: 24px; font-size: 14px; color: #64748b; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.6); }
-        .back-link:hover { background: #fff; color: #0ea5e9; }
         header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
         header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
         .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
@@ -55,7 +53,6 @@
         @media (max-width: 600px) {
             header { padding: 40px 16px 32px; }
             header h1 { font-size: 24px; }
-            .back-link { left: 12px; top: 16px; font-size: 12px; }
             .section { padding: 20px; }
             .about-grid { grid-template-columns: 1fr; }
             .platform-grid { grid-template-columns: 1fr; }
@@ -73,7 +70,6 @@
         </div>
     </div>
     <header>
-        <a href="index.html" class="back-link">← 返回博客</a>
         <h1>🌻 关于小葵</h1>
         <p class="sub">一个热爱二次元的自由人 ✨</p>
     </header>
@@ -83,11 +79,8 @@
             <div class="section-title">🙋 关于我</div>
             <div class="about-grid">
                 <div class="about-item"><span class="icon">💼</span><span>自由职业 / 摸鱼中</span></div>
-                <div class="about-item"><span class="icon">🎨</span><span>资深二次元 / 追番狂魔</span></div>
-                <div class="about-item"><span class="icon">☕</span><span>咖啡因依赖患者</span></div>
-                <div class="about-item"><span class="icon">🐱</span><span>家里有两只猫 🐈🐈</span></div>
-                <div class="about-item"><span class="icon">📧</span><span>xiaokui@example.com</span></div>
-                <div class="about-item"><span class="icon">🌏</span><span>深圳 · 晴天</span></div>
+                <div class="about-item"><span class="icon">🎨</span><span>喜欢二次元</span></div>
+                <div class="about-item"><span class="icon">📧</span><span>chenzehao2025@gmail.com</span></div>
             </div>
         </div>
 
@@ -104,13 +97,13 @@
     <script>
         const PLATFORMS = [
             { icon: '🐙', name: 'GitHub', desc: '代码仓库 & 开源项目', color: '#1e293b', url: 'https://github.com/xiaokuiizumi' },
-            { icon: '📺', name: 'Bilibili', desc: '追番 & 偶尔发视频', color: '#fb7299', url: 'https://space.bilibili.com/' },
-            { icon: '🎵', name: '网易云音乐', desc: '听歌歌单', color: '#d43c33', url: '#' },
-            { icon: '🎵', name: '抖音', desc: '刷短视频', color: '#000000', url: 'https://www.douyin.com/user/' },
-            { icon: '📕', name: '小红书', desc: '日常分享', color: '#ff2442', url: 'https://www.xiaohongshu.com/user/' },
-            { icon: '💬', name: '微博', desc: '随时碎碎念', color: '#ff8200', url: 'https://weibo.com/u/' },
-            { icon: '🎮', name: 'Steam', desc: '打游戏 & 喜加一', color: '#1b2838', url: 'https://steamcommunity.com/id/' },
-            { icon: '🦊', name: 'Twitter / X', desc: '日常摸鱼 & 二次元', color: '#1da1f2', url: 'https://twitter.com/' },
+            { icon: '📺', name: 'Bilibili', desc: '追番 & 偶尔发视频', color: '#fb7299', url: 'https://space.bilibili.com/435743446' },
+            { icon: '🎵', name: '网易云音乐', desc: '听歌歌单', color: '#d43c33', url: 'https://music.163.com/#/user/home?id=13946395734' },
+            { icon: '🎵', name: '抖音', desc: '刷短视频', color: '#000000', url: 'https://www.douyin.com/user/MS4wLjABAAAAHYGRgh9usJ5dg0vmOcjX91HQgat3qeHO4dSs_MJEy--Sc9iCFN5oqqbWDAJvdQ_z?from_tab_name=main' },
+            { icon: '📕', name: '小红书', desc: '日常分享', color: '#ff2442', url: 'https://www.xiaohongshu.com/user/profile/62ece036000000001f005bd7' },
+            { icon: '💬', name: '微博', desc: '随时碎碎念', color: '#ff8200', url: 'https://weibo.com/u/7064740374' },
+            { icon: '🎮', name: 'Steam', desc: '打游戏 & 喜加一', color: '#1b2838', url: 'https://steamcommunity.com/profiles/76561198842450907/' },
+            { icon: '🦊', name: 'Twitter / X', desc: '日常摸鱼 & 二次元', color: '#1da1f2', url: 'https://x.com/konata000528' },
         ];
 
         function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
