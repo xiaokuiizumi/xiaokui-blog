@@ -7,265 +7,106 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.8;
+            background: #f8fafc; color: #1e293b; line-height: 1.8;
         }
-
         header {
             background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
-            padding: 48px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden;
         }
-
         header::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: #f8fafc;
-            border-radius: 50% 50% 0 0;
+            content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
+            background: #f8fafc; border-radius: 50% 50% 0 0;
         }
-
         .back-link {
-            position: absolute;
-            left: 24px;
-            top: 24px;
-            font-size: 14px;
-            color: #64748b;
-            text-decoration: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            background: rgba(255,255,255,0.6);
-            transition: all 0.2s;
+            position: absolute; left: 24px; top: 24px;
+            font-size: 14px; color: #64748b; text-decoration: none;
+            padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.6);
         }
-
         .back-link:hover { background: #fff; color: #0ea5e9; }
-
         header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
         header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
-
         .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 24px 0 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 20px; flex-wrap: wrap; gap: 12px; }
         .toolbar .count { font-size: 14px; color: #64748b; }
         .toolbar .count strong { color: #0ea5e9; }
-
         .btn-add {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 22px;
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s;
+            display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px;
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; border: none;
+            border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer;
         }
-
-        .btn-add:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(14,165,233,0.35); }
+        .btn-add:hover { box-shadow: 0 4px 16px rgba(14,165,233,0.35); }
         .btn-add.hidden { display: none; }
 
-        /* ===== 文章卡片 ===== */
         .post-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 24px 28px;
-            margin-bottom: 16px;
-            border: 1px solid #f1f5f9;
-            transition: all 0.25s ease;
-            position: relative;
+            background: #fff; border-radius: 14px; padding: 24px 28px; margin-bottom: 16px;
+            border: 1px solid #f1f5f9; position: relative;
         }
-
-        .post-card:hover {
-            border-color: #bae6fd;
-            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
-            transform: translateY(-2px);
-        }
-
+        .post-card:hover { border-color: #bae6fd; box-shadow: 0 4px 20px rgba(14,165,233,0.08); }
         .post-card .card-actions {
-            position: absolute;
-            top: 12px;
-            right: 14px;
-            display: flex;
-            gap: 6px;
-            opacity: 0;
-            transition: opacity 0.2s;
+            position: absolute; top: 12px; right: 14px; display: flex; gap: 6px;
+            opacity: 0; transition: opacity 0.2s;
         }
-
         .post-card:hover .card-actions { opacity: 1; }
-
         .post-card .card-actions button {
-            width: 30px; height: 30px;
-            border-radius: 50%; border: none;
-            cursor: pointer; font-size: 14px;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
-            background: rgba(0,0,0,0.35); color: #fff;
+            width: 30px; height: 30px; border-radius: 50%; border: none; cursor: pointer;
+            font-size: 14px; background: rgba(0,0,0,0.35); color: #fff;
             backdrop-filter: blur(4px);
         }
-
         .post-card .card-actions .edit-action:hover { background: rgba(14,165,233,0.85); }
         .post-card .card-actions .delete-action:hover { background: rgba(239,68,68,0.85); }
         .post-card .card-actions.hidden { display: none; }
-
         .post-mood { font-size: 28px; margin-bottom: 8px; }
-        .post-meta {
-            font-size: 13px; color: #94a3b8;
-            margin-bottom: 8px;
-            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-        }
-
+        .post-meta { font-size: 13px; color: #94a3b8; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .post-meta .tag {
-            display: inline-block;
-            background: #e0f2fe; color: #0ea5e9;
+            display: inline-block; background: #e0f2fe; color: #0ea5e9;
             font-size: 12px; padding: 2px 10px; border-radius: 99px;
         }
-
         .post-card h3 { font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-
         .post-content { font-size: 14px; color: #475569; line-height: 1.85; }
-
-        .post-content h1, .post-content h2, .post-content h3 {
-            margin: 20px 0 10px;
-            color: #1e293b; font-weight: 700;
-        }
-        .post-content h1 { font-size: 20px; }
-        .post-content h2 { font-size: 18px; }
-        .post-content h3 { font-size: 16px; }
+        .post-content h1,.post-content h2,.post-content h3 { margin: 20px 0 10px; color: #1e293b; font-weight: 700; }
+        .post-content h1 { font-size: 20px; } .post-content h2 { font-size: 18px; } .post-content h3 { font-size: 16px; }
         .post-content p { margin-bottom: 12px; }
-        .post-content ul, .post-content ol { margin: 8px 0 12px; padding-left: 24px; }
+        .post-content ul,.post-content ol { margin: 8px 0 12px; padding-left: 24px; }
         .post-content li { margin-bottom: 4px; }
-        .post-content code {
-            background: #f1f5f9; padding: 2px 8px; border-radius: 6px;
-            font-size: 13px; font-family: "SF Mono","Fira Code","Consolas",monospace; color: #0ea5e9;
-        }
-        .post-content pre {
-            background: #1e293b; color: #e2e8f0;
-            padding: 16px 20px; border-radius: 12px;
-            overflow-x: auto; margin: 16px 0;
-            font-size: 13px; line-height: 1.6;
-        }
+        .post-content code { background: #f1f5f9; padding: 2px 8px; border-radius: 6px; font-size: 13px; font-family: "SF Mono","Fira Code","Consolas",monospace; color: #0ea5e9; }
+        .post-content pre { background: #1e293b; color: #e2e8f0; padding: 16px 20px; border-radius: 12px; overflow-x: auto; margin: 16px 0; font-size: 13px; }
         .post-content pre code { background: none; padding: 0; color: inherit; }
-        .post-content blockquote {
-            border-left: 4px solid #bae6fd; padding: 8px 16px;
-            margin: 16px 0; background: #f8fafc;
-            border-radius: 0 8px 8px 0; color: #64748b;
-        }
+        .post-content blockquote { border-left: 4px solid #bae6fd; padding: 8px 16px; margin: 16px 0; background: #f8fafc; border-radius: 0 8px 8px 0; color: #64748b; }
         .post-content hr { border: none; border-top: 1px solid #e2e8f0; margin: 24px 0; }
         .post-content strong { color: #1e293b; font-weight: 700; }
-        .post-content a { color: #0ea5e9; text-decoration: underline; }
-        .post-content img { max-width: 100%; border-radius: 10px; margin: 12px 0; }
 
         .empty-state { text-align: center; padding: 64px 24px; color: #94a3b8; }
         .empty-state .icon { font-size: 56px; margin-bottom: 16px; }
-        .empty-state p { font-size: 15px; }
 
-        .loading { text-align: center; padding: 48px 24px; color: #94a3b8; font-size: 15px; }
-
-        /* ===== 弹窗 ===== */
-        .modal-overlay {
-            display: none;
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(4px);
-            z-index: 100;
-            align-items: center; justify-content: center;
-            padding: 24px;
-        }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
         .modal-overlay.open { display: flex; }
-
-        .modal {
-            background: #fff;
-            border-radius: 20px; padding: 32px;
-            width: 100%; max-width: 540px;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.15);
-            max-height: 90vh; overflow-y: auto;
-            animation: modalIn 0.25s ease;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
+        .modal { background: #fff; border-radius: 20px; padding: 32px; width: 100%; max-width: 540px; box-shadow: 0 24px 80px rgba(0,0,0,0.15); max-height: 90vh; overflow-y: auto; }
         .modal h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #1e293b; }
-
         .form-group { margin-bottom: 18px; }
-
-        .form-group label {
-            display: block; font-size: 13px; font-weight: 600;
-            color: #475569; margin-bottom: 6px;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px 14px;
-            border: 1px solid #e2e8f0; border-radius: 10px;
-            font-size: 14px; font-family: inherit; color: #1e293b;
-            transition: border-color 0.2s; background: #fff;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
-        }
-
-        .form-group textarea { resize: vertical; }
-        .form-group textarea#inputContent { min-height: 120px; }
-
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        .form-group input,.form-group select,.form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; color: #1e293b; background: #fff; }
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
         .form-row { display: flex; gap: 14px; }
         .form-row .form-group { flex: 1; }
-
         .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
-
-        .modal-actions button {
-            flex: 1; padding: 11px; border-radius: 10px;
-            font-size: 14px; font-weight: 600; border: none;
-            cursor: pointer; transition: all 0.2s;
-        }
-
+        .modal-actions button { flex: 1; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
         .modal-actions .btn-cancel { background: #f1f5f9; color: #64748b; }
-        .modal-actions .btn-cancel:hover { background: #e2e8f0; }
-        .modal-actions .btn-submit {
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            color: #fff;
-        }
-        .modal-actions .btn-submit:hover { box-shadow: 0 4px 16px rgba(14,165,233,0.3); }
+        .modal-actions .btn-submit { background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; }
 
-        footer {
-            text-align: center;
-            padding: 40px 24px 28px;
-            color: #94a3b8;
-            font-size: 13px;
-        }
+        footer { text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px; }
         footer a { color: #0ea5e9; text-decoration: none; }
         .admin-bar { margin-top: 6px; font-size: 12px; }
-        .admin-bar a { color: #94a3b8; }
+        .admin-bar a { color: #94a3b8; text-decoration: none; }
         .admin-bar a:hover { color: #0ea5e9; }
-        .admin-bar .logged-in { color: #10b981; }
 
         @media (max-width: 600px) {
             header { padding: 56px 16px 32px; }
             header h1 { font-size: 24px; }
-            .back-link { left: 12px; top: 16px; font-size: 12px; padding: 5px 10px; }
+            .back-link { left: 12px; top: 16px; font-size: 12px; }
             .post-card { padding: 20px; }
             .form-row { flex-direction: column; gap: 0; }
             .modal { padding: 24px; }
@@ -273,9 +114,8 @@
     </style>
 </head>
 <body>
-
     <header>
-        <a href="blog.html" class="back-link">← 返回博客</a>
+        <a href="index.html" class="back-link">← 返回博客</a>
         <h1>📝 小葵的文章</h1>
         <p class="sub">记录技术、生活和思考 ✨</p>
     </header>
@@ -285,20 +125,19 @@
             <span class="count">共 <strong id="totalCount">0</strong> 篇</span>
             <button class="btn-add hidden" id="btnAdd" onclick="openModal()">＋ 写新文章</button>
         </div>
-        <div id="postList"><div class="loading">加载中…</div></div>
+        <div id="postList"><div class="empty-state"><div class="icon">📝</div><p>加载中…</p></div></div>
     </div>
 
-    <!-- 弹窗 -->
     <div class="modal-overlay" id="modal">
         <div class="modal">
             <h2 id="modalTitle">✏️ 写新文章</h2>
             <div class="form-group">
                 <label>文章标题 *</label>
-                <input type="text" id="inputTitle" placeholder="输入标题…" maxlength="60">
+                <input type="text" id="inputTitle" maxlength="60">
             </div>
             <div class="form-group">
-                <label>正文</label>
-                <textarea id="inputContent" placeholder="支持 Markdown 语法 ✨&#10;用 # 标题、**加粗**、- 列表、`代码` 来写文章吧"></textarea>
+                <label>正文（支持 Markdown）</label>
+                <textarea id="inputContent"></textarea>
             </div>
             <div class="form-row">
                 <div class="form-group">
@@ -313,7 +152,6 @@
                         <option value="💪">💪 加油</option>
                         <option value="😴">😴 困了</option>
                         <option value="🥰">🥰 好喜欢</option>
-                        <option value="😭">😭 哭了</option>
                         <option value="🔥">🔥 燃起来了</option>
                         <option value="☕">☕ 摸鱼</option>
                     </select>
@@ -331,117 +169,73 @@
     </div>
 
     <footer>
-        <p>© 2026 <a href="blog.html">小葵的博客</a> · 共 <strong id="footerCount">0</strong> 篇</p>
-        <div class="admin-bar" id="adminBar"><a href="login.html">🔑 登录后管理</a></div>
+        <p>© 2026 <a href="index.html">小葵的博客</a> · 共 <strong id="footerCount">0</strong> 篇</p>
+        <div class="admin-bar" id="adminBar"><a href="index.html">🏠 返回首页</a></div>
     </footer>
 
     <script>
-        let isAdmin = false;
+        const ADMIN_PASSWORD = '葵葵2026';
+        const STORAGE_KEY = 'xiaokui_posts_static';
+        const DEFAULT_POSTS = [
+            { title: '欢迎来到小葵的博客', content: '这是我的第一篇博客！\n\n以后会在这里分享 **技术笔记**、**追番感想** 和生活日常～\n\n请多指教 ✨', tag: '生活', mood: '😊', date: '2026-05-26' }
+        ];
         let editingId = null;
 
-        // ===== API 工具 =====
-        function authHeaders() {
-            const token = localStorage.getItem('token');
-            return token ? { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+        function isAdmin() { return localStorage.getItem('xiaokui_admin') === 'true'; }
+
+        function getPosts() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) return JSON.parse(raw);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_POSTS));
+            return [...DEFAULT_POSTS];
         }
+        function savePosts(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
 
-        // ===== 检查登录 =====
-        async function checkAuth() {
-            const token = localStorage.getItem('token');
-            if (!token) return;
-            try {
-                const res = await fetch('/api/me', { headers: { 'Authorization': 'Bearer ' + token } });
-                if (res.ok) {
-                    isAdmin = true;
-                    document.getElementById('btnAdd').classList.remove('hidden');
-                    document.getElementById('adminBar').innerHTML =
-                        '<span class="logged-in">✅ 管理员</span> <a href="#" onclick="logout()">🚪 退出</a>';
-                }
-            } catch {}
-        }
+        function render() {
+            const list = getPosts();
+            const el = document.getElementById('postList');
+            document.getElementById('totalCount').textContent = list.length;
+            document.getElementById('footerCount').textContent = list.length;
 
-        function logout() { localStorage.removeItem('token'); location.reload(); }
-
-        // ===== 获取并渲染文章 =====
-        async function loadPosts() {
-            const container = document.getElementById('postList');
-            try {
-                const res = await fetch('/api/posts');
-                const posts = await res.json();
-                document.getElementById('totalCount').textContent = posts.length;
-                document.getElementById('footerCount').textContent = posts.length;
-
-                if (posts.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>还没有文章哦，写一篇吧～</p></div>';
-                    return;
-                }
-
-                container.innerHTML = posts.map(p => `
-                    <article class="post-card">
-                        <div class="card-actions ${isAdmin ? '' : 'hidden'}">
-                            <button class="edit-action" onclick="editPost(${p.id})" title="编辑">✎</button>
-                            <button class="delete-action" onclick="deletePost(${p.id})" title="删除">✕</button>
-                        </div>
-                        <div class="post-mood">${p.mood || '📝'}</div>
-                        <div class="post-meta">
-                            ${formatDate(p.date)}${p.tag ? '<span class="tag">' + p.tag + '</span>' : ''}
-                        </div>
-                        <h3>${escHtml(p.title)}</h3>
-                        <div class="post-content">${renderMarkdown(p.content || '')}</div>
-                    </article>
-                `).join('');
-            } catch {
-                container.innerHTML = '<div class="empty-state"><div class="icon">😵</div><p>加载失败，请刷新重试</p></div>';
+            if (list.length === 0) {
+                el.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>还没有文章，写一篇吧～</p></div>';
+                return;
             }
+            const admin = isAdmin();
+            el.innerHTML = list.map((p, i) => `
+                <div class="post-card">
+                    <div class="card-actions ${admin ? '' : 'hidden'}">
+                        <button class="edit-action" onclick="editPost(${i})">✎</button>
+                        <button class="delete-action" onclick="deletePost(${i})">✕</button>
+                    </div>
+                    <div class="post-mood">${p.mood||'📝'}</div>
+                    <div class="post-meta">${formatDate(p.date)}${p.tag ? '<span class="tag">'+escHtml(p.tag)+'</span>' : ''}</div>
+                    <h3>${escHtml(p.title)}</h3>
+                    <div class="post-content">${renderMarkdown(p.content||'')}</div>
+                </div>
+            `).join('');
         }
 
-        function formatDate(d) {
-            if (!d) return '';
-            const parts = d.split('-');
-            return parts[0] + '.' + parts[1] + '.' + parts[2];
-        }
+        function formatDate(d) { if (!d) return ''; const p=d.split('-'); return p[0]+'.'+p[1]+'.'+p[2]; }
+        function renderMarkdown(t) { return typeof marked!=='undefined'&&marked.parse ? marked.parse(t,{breaks:true}) : t.replace(/\n/g,'<br>'); }
+        function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-        function renderMarkdown(text) {
-            if (typeof marked !== 'undefined' && marked.parse) {
-                return marked.parse(text, { breaks: true });
-            }
-            return text.replace(/\n/g, '<br>');
-        }
-
-        function escHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        // ===== CRUD =====
-        async function deletePost(id) {
+        function deletePost(i) {
             if (!confirm('确定要删除吗？')) return;
-            try {
-                const res = await fetch('/api/posts/' + id, {
-                    method: 'DELETE',
-                    headers: authHeaders()
-                });
-                if (res.ok) loadPosts();
-                else { const d = await res.json(); alert(d.error || '删除失败'); }
-            } catch { alert('网络错误'); }
+            const list = getPosts(); list.splice(i,1); savePosts(list); render();
         }
 
-        function editPost(id) {
-            editingId = id;
-            // 从已有的 DOM 中找数据比较麻烦，直接从 API 重新获取
-            fetch('/api/posts').then(r => r.json()).then(posts => {
-                const post = posts.find(p => p.id === id);
-                if (!post) return;
-                document.getElementById('modalTitle').textContent = '✏️ 编辑文章';
-                document.querySelector('.btn-submit').textContent = '保存';
-                document.getElementById('inputTitle').value = post.title;
-                document.getElementById('inputContent').value = post.content;
-                document.getElementById('inputTag').value = post.tag || '';
-                document.getElementById('inputMood').value = post.mood || '😊';
-                document.getElementById('inputDate').value = post.date || '';
-                document.getElementById('modal').classList.add('open');
-            });
+        function editPost(i) {
+            editingId = i;
+            const p = getPosts()[i];
+            document.getElementById('modalTitle').textContent = '✏️ 编辑文章';
+            document.querySelector('.btn-submit').textContent = '保存';
+            document.getElementById('inputTitle').value = p.title;
+            document.getElementById('inputContent').value = p.content||'';
+            document.getElementById('inputTag').value = p.tag||'';
+            document.getElementById('inputMood').value = p.mood||'😊';
+            document.getElementById('inputDate').value = p.date||'';
+            document.getElementById('modal').classList.add('open');
         }
 
         function openModal() {
@@ -454,46 +248,27 @@
             document.getElementById('inputMood').value = '😊';
             document.getElementById('inputDate').value = new Date().toISOString().split('T')[0];
             document.getElementById('modal').classList.add('open');
-            document.getElementById('inputTitle').focus();
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('open');
-            editingId = null;
-        }
+        function closeModal() { document.getElementById('modal').classList.remove('open'); editingId=null; }
 
-        async function savePost() {
+        function savePost() {
             const title = document.getElementById('inputTitle').value.trim();
             if (!title) { alert('请输入标题'); return; }
-
-            const body = {
-                title,
-                content: document.getElementById('inputContent').value.trim(),
-                tag: document.getElementById('inputTag').value.trim(),
-                mood: document.getElementById('inputMood').value,
-                date: document.getElementById('inputDate').value || new Date().toISOString().split('T')[0]
-            };
-
-            try {
-                const url = editingId ? '/api/posts/' + editingId : '/api/posts';
-                const method = editingId ? 'PUT' : 'POST';
-                const res = await fetch(url, {
-                    method,
-                    headers: authHeaders(),
-                    body: JSON.stringify(body)
-                });
-                if (res.ok) {
-                    closeModal();
-                    loadPosts();
-                } else {
-                    const d = await res.json();
-                    alert(d.error || '操作失败');
-                }
-            } catch { alert('网络错误'); }
+            const list = getPosts();
+            const data = { title, content: document.getElementById('inputContent').value.trim(), tag: document.getElementById('inputTag').value.trim(), mood: document.getElementById('inputMood').value, date: document.getElementById('inputDate').value };
+            if (editingId !== null) { list[editingId] = data; }
+            else { list.unshift(data); }
+            savePosts(list); closeModal(); render();
         }
 
-        // ===== 初始化 =====
-        checkAuth().then(() => loadPosts());
+        // 管理模式
+        if (isAdmin()) {
+            document.getElementById('btnAdd').classList.remove('hidden');
+            document.getElementById('adminBar').innerHTML = '<span style="color:#10b981">✅ 管理模式</span> <a href="index.html">🏠 返回首页</a>';
+        }
+
+        render();
     </script>
 </body>
 </html>

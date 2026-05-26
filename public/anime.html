@@ -6,287 +6,103 @@
     <title>小葵的追番列表</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.8;
+            background: #f8fafc; color: #1e293b; line-height: 1.8;
         }
-
         header {
             background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
-            padding: 48px 24px 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden;
         }
-
         header::after {
-            content: '';
-            position: absolute;
-            bottom: -40px;
-            left: 0;
-            width: 100%;
-            height: 80px;
-            background: #f8fafc;
-            border-radius: 50% 50% 0 0;
+            content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
+            background: #f8fafc; border-radius: 50% 50% 0 0;
         }
-
-        .back-link {
-            position: absolute;
-            left: 24px; top: 24px;
-            font-size: 14px; color: #64748b;
-            text-decoration: none;
-            padding: 6px 14px; border-radius: 8px;
-            background: rgba(255,255,255,0.6);
-            transition: all 0.2s;
-        }
-
+        .back-link { position: absolute; left: 24px; top: 24px; font-size: 14px; color: #64748b; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: rgba(255,255,255,0.6); }
         .back-link:hover { background: #fff; color: #0ea5e9; }
-
         header h1 { font-size: 32px; font-weight: 800; color: #1e293b; }
         header .sub { color: #64748b; font-size: 15px; margin-top: 6px; }
-
         .container { max-width: 880px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-        .toolbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 24px 0 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 20px; flex-wrap: wrap; gap: 12px; }
         .toolbar .count { font-size: 14px; color: #64748b; }
         .toolbar .count strong { color: #0ea5e9; }
-
-        .btn-add {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 10px 22px;
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            color: #fff; border: none; border-radius: 10px;
-            font-size: 14px; font-weight: 600; cursor: pointer;
-            transition: all 0.25s;
-        }
-
-        .btn-add:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(14,165,233,0.35); }
+        .btn-add { display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px; background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
         .btn-add.hidden { display: none; }
 
         .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
-
-        .filter-btn {
-            padding: 6px 16px; border-radius: 99px; font-size: 13px;
-            border: 1px solid #e2e8f0; background: #fff;
-            color: #64748b; cursor: pointer; transition: all 0.2s;
-        }
-
+        .filter-btn { padding: 6px 16px; border-radius: 99px; font-size: 13px; border: 1px solid #e2e8f0; background: #fff; color: #64748b; cursor: pointer; }
         .filter-btn:hover { border-color: #bae6fd; color: #0ea5e9; }
         .filter-btn.active { background: #e0f2fe; border-color: #0ea5e9; color: #0ea5e9; font-weight: 600; }
 
-        .anime-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .anime-card {
-            background: #fff; border-radius: 12px; overflow: hidden;
-            border: 1px solid #f1f5f9; transition: all 0.25s ease;
-            position: relative;
-        }
-
-        .anime-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(14, 165, 233, 0.12);
-            border-color: #bae6fd;
-        }
-
-        .anime-card .card-actions {
-            position: absolute;
-            top: 8px; left: 8px;
-            display: flex; gap: 6px;
-            opacity: 0; transition: opacity 0.2s;
-            z-index: 2;
-        }
-
+        .anime-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .anime-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #f1f5f9; position: relative; }
+        .anime-card:hover { border-color: #bae6fd; box-shadow: 0 8px 24px rgba(14,165,233,0.12); }
+        .anime-card .card-actions { position: absolute; top: 8px; left: 8px; display: flex; gap: 6px; opacity: 0; transition: opacity 0.2s; z-index: 2; }
         .anime-card:hover .card-actions { opacity: 1; }
-
-        .anime-card .card-actions button {
-            width: 28px; height: 28px; border-radius: 50%;
-            border: none; cursor: pointer; font-size: 13px;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(0,0,0,0.35); color: #fff;
-            backdrop-filter: blur(4px); transition: all 0.2s;
-        }
-
+        .anime-card .card-actions button { width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer; font-size: 13px; background: rgba(0,0,0,0.35); color: #fff; backdrop-filter: blur(4px); }
         .anime-card .card-actions .edit-action:hover { background: rgba(14,165,233,0.85); }
         .anime-card .card-actions .delete-action:hover { background: rgba(239,68,68,0.85); }
         .anime-card .card-actions.hidden { display: none; }
 
-        .anime-cover {
-            width: 100%; height: 140px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 40px; position: relative;
-        }
-
-        .anime-cover .status-badge {
-            position: absolute; top: 10px; right: 10px;
-            font-size: 11px; padding: 3px 10px; border-radius: 99px;
-            font-weight: 600; background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(4px);
-        }
-
+        .anime-cover { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 40px; position: relative; }
+        .anime-cover .status-badge { position: absolute; top: 10px; right: 10px; font-size: 11px; padding: 3px 10px; border-radius: 99px; font-weight: 600; background: rgba(255,255,255,0.85); backdrop-filter: blur(4px); }
         .status-badge.done { color: #059669; }
         .status-badge.watching { color: #0ea5e9; }
         .status-badge.paused { color: #f59e0b; }
-
         .anime-body { padding: 14px 16px 16px; }
         .anime-body h4 { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 2px; }
         .anime-body .anime-origin { font-size: 12px; color: #94a3b8; margin-bottom: 8px; }
         .anime-body .anime-comment { font-size: 13px; color: #64748b; line-height: 1.6; }
         .anime-body .anime-rating { margin-top: 8px; font-size: 14px; letter-spacing: 2px; }
-
-        .anime-cover.has-image { overflow: hidden; }
         .anime-cover .cover-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .empty-state { text-align: center; padding: 64px 24px; color: #94a3b8; }
-        .empty-state .icon { font-size: 56px; margin-bottom: 16px; }
-        .empty-state p { font-size: 15px; }
+        .empty-state { text-align: center; padding: 64px; color: #94a3b8; }
 
-        .loading { text-align: center; padding: 48px 24px; color: #94a3b8; font-size: 15px; }
-
-        /* ===== 弹窗 ===== */
-        .modal-overlay {
-            display: none;
-            position: fixed; inset: 0;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(4px);
-            z-index: 100;
-            align-items: center; justify-content: center;
-            padding: 24px;
-        }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 100; align-items: center; justify-content: center; padding: 24px; }
         .modal-overlay.open { display: flex; }
-
-        .modal {
-            background: #fff; border-radius: 20px; padding: 32px;
-            width: 100%; max-width: 500px;
-            box-shadow: 0 24px 80px rgba(0,0,0,0.15);
-            max-height: 90vh; overflow-y: auto;
-            animation: modalIn 0.25s ease;
-        }
-
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
+        .modal { background: #fff; border-radius: 20px; padding: 32px; width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
         .modal h2 { font-size: 20px; font-weight: 700; margin-bottom: 24px; color: #1e293b; }
-
         .form-group { margin-bottom: 18px; }
-
-        .form-group label {
-            display: block; font-size: 13px; font-weight: 600;
-            color: #475569; margin-bottom: 6px;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 10px 14px;
-            border: 1px solid #e2e8f0; border-radius: 10px;
-            font-size: 14px; font-family: inherit; color: #1e293b;
-            transition: border-color 0.2s; background: #fff;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none; border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
-        }
-
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 6px; }
+        .form-group input,.form-group select,.form-group textarea { width: 100%; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; font-family: inherit; color: #1e293b; background: #fff; }
+        .form-group input:focus,.form-group select:focus,.form-group textarea:focus { outline: none; border-color: #0ea5e9; box-shadow: 0 0 0 3px rgba(14,165,233,0.1); }
         .form-group textarea { resize: vertical; min-height: 70px; }
-
         .form-group .color-options { display: flex; gap: 10px; flex-wrap: wrap; }
-
-        .form-group .color-options button {
-            width: 40px; height: 40px; border-radius: 10px;
-            border: 3px solid transparent; cursor: pointer;
-            transition: all 0.2s;
-        }
-
+        .form-group .color-options button { width: 40px; height: 40px; border-radius: 10px; border: 3px solid transparent; cursor: pointer; }
         .form-group .color-options button.selected { border-color: #1e293b; transform: scale(1.1); }
-
         .cover-upload-area { display: flex; align-items: center; gap: 16px; }
-
-        .cover-upload-btn {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 9px 18px; background: #f1f5f9;
-            border: 1px dashed #cbd5e1; border-radius: 10px;
-            font-size: 13px; color: #64748b; cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .cover-upload-btn:hover { border-color: #0ea5e9; color: #0ea5e9; background: #f0f9ff; }
-
-        .cover-preview {
-            width: 72px; height: 72px; border-radius: 8px;
-            overflow: hidden; border: 2px solid #e2e8f0;
-            background: #f8fafc; display: none; flex-shrink: 0;
-            position: relative;
-        }
-
+        .cover-upload-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 18px; background: #f1f5f9; border: 1px dashed #cbd5e1; border-radius: 10px; font-size: 13px; color: #64748b; cursor: pointer; }
+        .cover-upload-btn:hover { border-color: #0ea5e9; color: #0ea5e9; }
+        .cover-preview { width: 72px; height: 72px; border-radius: 8px; overflow: hidden; border: 2px solid #e2e8f0; background: #f8fafc; display: none; flex-shrink: 0; position: relative; }
         .cover-preview.has-image { display: block; }
         .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
-
-        .cover-preview .remove-cover {
-            position: absolute; top: -6px; right: -6px;
-            width: 20px; height: 20px; border-radius: 50%;
-            border: none; background: #ef4444; color: #fff;
-            font-size: 11px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .cover-preview .remove-cover { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; border: none; background: #ef4444; color: #fff; font-size: 11px; cursor: pointer; }
         #coverInput { display: none; }
-
         .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
-
-        .modal-actions button {
-            flex: 1; padding: 11px; border-radius: 10px;
-            font-size: 14px; font-weight: 600; border: none;
-            cursor: pointer; transition: all 0.2s;
-        }
-
+        .modal-actions button { flex: 1; padding: 11px; border-radius: 10px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
         .modal-actions .btn-cancel { background: #f1f5f9; color: #64748b; }
-        .modal-actions .btn-cancel:hover { background: #e2e8f0; }
-        .modal-actions .btn-submit {
-            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            color: #fff;
-        }
-        .modal-actions .btn-submit:hover { box-shadow: 0 4px 16px rgba(14,165,233,0.3); }
+        .modal-actions .btn-submit { background: linear-gradient(135deg, #0ea5e9, #3b82f6); color: #fff; }
 
-        footer {
-            text-align: center; padding: 40px 24px 28px;
-            color: #94a3b8; font-size: 13px;
-        }
+        footer { text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px; }
         footer a { color: #0ea5e9; text-decoration: none; }
         .admin-bar { margin-top: 6px; font-size: 12px; }
-        .admin-bar a { color: #94a3b8; }
+        .admin-bar a { color: #94a3b8; text-decoration: none; }
         .admin-bar a:hover { color: #0ea5e9; }
-        .admin-bar .logged-in { color: #10b981; }
 
         @media (max-width: 600px) {
             header { padding: 56px 16px 32px; }
             header h1 { font-size: 24px; }
-            .back-link { left: 12px; top: 16px; font-size: 12px; padding: 5px 10px; }
+            .back-link { left: 12px; top: 16px; font-size: 12px; }
             .anime-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
-            .modal { padding: 24px; }
             .toolbar { flex-direction: column; align-items: stretch; }
+            .modal { padding: 24px; }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <a href="blog.html" class="back-link">← 返回博客</a>
+        <a href="index.html" class="back-link">← 返回博客</a>
         <h1>🎬 小葵的追番列表</h1>
         <p class="sub">记录每一部看过的动画 ✨</p>
     </header>
@@ -304,8 +120,7 @@
             </div>
             <button class="btn-add hidden" id="btnAdd" onclick="openModal()">＋ 添加新番</button>
         </div>
-
-        <div class="anime-grid" id="animeGrid"><div class="loading" style="grid-column:1/-1;text-align:center;padding:48px;color:#94a3b8;">加载中…</div></div>
+        <div class="anime-grid" id="animeGrid"><div class="empty-state" style="grid-column:1/-1"><p>加载中…</p></div></div>
     </div>
 
     <!-- 弹窗 -->
@@ -314,7 +129,7 @@
             <h2 id="modalTitle">✏️ 添加新番</h2>
             <div class="form-group">
                 <label>番剧名称 *</label>
-                <input type="text" id="inputName" placeholder="例：幸运星" maxlength="30">
+                <input type="text" id="inputName" maxlength="30">
             </div>
             <div class="form-group">
                 <label>年份 · 制作公司</label>
@@ -322,7 +137,7 @@
             </div>
             <div class="form-group">
                 <label>我的短评</label>
-                <textarea id="inputComment" placeholder="写点想说的…" maxlength="80"></textarea>
+                <textarea id="inputComment" maxlength="80"></textarea>
             </div>
             <div class="form-group">
                 <label>追番状态</label>
@@ -376,160 +191,101 @@
     </div>
 
     <footer>
-        <p>© 2026 <a href="blog.html">小葵的博客</a> · 共 <strong id="footerCount">0</strong> 部番剧</p>
-        <div class="admin-bar" id="adminBar"><a href="login.html">🔑 登录后管理</a></div>
+        <p>© 2026 <a href="index.html">小葵的博客</a> · 共 <strong id="footerCount">0</strong> 部番剧</p>
+        <div class="admin-bar" id="adminBar"><a href="index.html">🏠 返回首页</a></div>
     </footer>
 
     <script>
-        let isAdmin = false;
+        const ADMIN_PASSWORD = '葵葵2026';
+        const STORAGE_KEY = 'xiaokui_anime_static';
+        const DEFAULT_ANIME = [
+            { name:'幸运星', origin:'2007 · 京都动画', comment:'最喜欢的日常番！此方就是我的灵魂导师～', status:'done', rating:5, color:'fce4ec,f8bbd0', icon:'⭐', cover:null },
+            { name:'轻音少女', origin:'2009 · 京都动画', comment:'看完想学吉他了！唯酱太可爱了呜呜', status:'done', rating:5, color:'e0f2fe,bae6fd', icon:'🎸', cover:null },
+            { name:'琉璃龙龙', origin:'2025 · 动画工房', comment:'龙娘日常太治愈了，每周的精神食粮！', status:'watching', rating:5, color:'f0fdf4,bbf7d0', icon:'🐉', cover:null },
+            { name:'摇曳露营△', origin:'2018 · C-Station', comment:'看了之后开始迷上露营了，抚子太治愈了', status:'done', rating:5, color:'fef3c7,fde68a', icon:'🌻', cover:null },
+            { name:'孤独摇滚！', origin:'2022 · CloverWorks', comment:'波奇酱太真实了，社恐也能闪闪发光！', status:'watching', rating:5, color:'fce7f3,fbcfe8', icon:'☕', cover:null },
+            { name:'白箱', origin:'2014 · P.A.Works', comment:'做动画的动画，看了更想做创作相关的工作了', status:'done', rating:5, color:'dbeafe,bfdbfe', icon:'🎨', cover:null },
+        ];
+        const STATUS_MAP = { done:'已追完', watching:'追剧中', paused:'搁置中' };
+        const RATING_MAP = { 5:'⭐⭐⭐⭐⭐', 4:'⭐⭐⭐⭐', 3:'⭐⭐⭐', 2:'⭐⭐', 1:'⭐' };
+        const ICONS = ['🌸','⭐','🎸','🐉','🌻','🚲','☕','🎨','🍛','🌈','🦋','🍀'];
+
         let editingId = null;
         let selectedColor = 'fce4ec,f8bbd0';
         let coverData = null;
         let currentFilter = 'all';
 
-        // ===== API 工具 =====
-        function authHeaders() {
-            const token = localStorage.getItem('token');
-            return token
-                ? { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' }
-                : { 'Content-Type': 'application/json' };
+        function isAdmin() { return localStorage.getItem('xiaokui_admin') === 'true'; }
+
+        function getAnime() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) return JSON.parse(raw);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_ANIME));
+            return [...DEFAULT_ANIME];
         }
+        function saveAnime(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
 
-        // ===== 检查登录 =====
-        async function checkAuth() {
-            const token = localStorage.getItem('token');
-            if (!token) return;
-            try {
-                const res = await fetch('/api/me', { headers: { 'Authorization': 'Bearer ' + token } });
-                if (res.ok) {
-                    isAdmin = true;
-                    document.getElementById('btnAdd').classList.remove('hidden');
-                    document.getElementById('adminBar').innerHTML =
-                        '<span class="logged-in">✅ 管理员</span> <a href="#" onclick="logout()">🚪 退出</a>';
-                    // 显示所有卡片的编辑按钮
-                    document.querySelectorAll('.card-actions').forEach(el => el.classList.remove('hidden'));
-                }
-            } catch {}
-        }
+        function escHtml(s) { if(!s)return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-        function logout() { localStorage.removeItem('token'); location.reload(); }
+        function render() {
+            const list = getAnime();
+            const filtered = currentFilter === 'all' ? list : list.filter(a => a.status === currentFilter);
+            const grid = document.getElementById('animeGrid');
+            document.getElementById('totalCount').textContent = list.length;
+            document.getElementById('footerCount').textContent = list.length;
 
-        const STATUS_MAP = { done: '已追完', watching: '追剧中', paused: '搁置中' };
-        const RATING_MAP = { 5: '⭐⭐⭐⭐⭐', 4: '⭐⭐⭐⭐', 3: '⭐⭐⭐', 2: '⭐⭐', 1: '⭐' };
-
-        // ===== 加载 =====
-        async function loadAnime() {
-            try {
-                const res = await fetch('/api/anime');
-                const list = await res.json();
-
-                document.getElementById('totalCount').textContent = list.length;
-                document.getElementById('footerCount').textContent = list.length;
-
-                const filtered = currentFilter === 'all' ? list : list.filter(a => a.status === currentFilter);
-                const grid = document.getElementById('animeGrid');
-
-                if (filtered.length === 0) {
-                    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="icon">🌸</div><p>还没有番剧哦～</p></div>';
-                    return;
-                }
-
-                grid.innerHTML = filtered.map(a => {
-                    const cols = a.color.split(',');
-                    const stars = RATING_MAP[a.rating] || '⭐⭐⭐⭐⭐';
-                    const coverHtml = a.cover
-                        ? '<img class="cover-img" src="' + a.cover + '" alt="' + escHtml(a.name) + '">'
-                        : (a.icon || '📺');
-                    const coverClass = a.cover ? 'class="anime-cover has-image"' : '';
-                    const coverBg = 'style="background:linear-gradient(135deg,#' + cols[0] + ',#' + cols[1] + ');"';
-
-                    return '<div class="anime-card">' +
-                        '<div class="card-actions ' + (isAdmin ? '' : 'hidden') + '">' +
-                            '<button class="edit-action" onclick="editAnime(' + a.id + ')" title="编辑">✎</button>' +
-                            '<button class="delete-action" onclick="deleteAnime(' + a.id + ')" title="删除">✕</button>' +
-                        '</div>' +
-                        '<div ' + coverClass + ' ' + coverBg + '>' +
-                            coverHtml +
-                            '<span class="status-badge ' + a.status + '">' + STATUS_MAP[a.status] + '</span>' +
-                        '</div>' +
-                        '<div class="anime-body">' +
-                            '<h4>' + escHtml(a.name) + '</h4>' +
-                            '<div class="anime-origin">' + escHtml(a.origin || '—') + '</div>' +
-                            '<div class="anime-comment">' + escHtml(a.comment || '—') + '</div>' +
-                            '<div class="anime-rating">' + stars + '</div>' +
-                        '</div>' +
-                    '</div>';
-                }).join('');
-            } catch {
-                document.getElementById('animeGrid').innerHTML =
-                    '<div class="empty-state" style="grid-column:1/-1"><div class="icon">😵</div><p>加载失败</p></div>';
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><p>还没有番剧哦～</p></div>';
+                return;
             }
+            const admin = isAdmin();
+            grid.innerHTML = filtered.map(a => {
+                const idx = list.indexOf(a);
+                const cols = a.color.split(',');
+                const stars = RATING_MAP[a.rating]||'⭐⭐⭐⭐⭐';
+                const cover = a.cover ? '<img class="cover-img" src="'+a.cover+'" alt="'+escHtml(a.name)+'">' : (a.icon||'📺');
+                const cClass = a.cover ? 'anime-cover has-image' : 'anime-cover';
+                return '<div class="anime-card">' +
+                    '<div class="card-actions '+(admin?'':'hidden')+'">' +
+                        '<button class="edit-action" onclick="editAnime('+idx+')">✎</button>' +
+                        '<button class="delete-action" onclick="deleteAnime('+idx+')">✕</button>' +
+                    '</div>' +
+                    '<div class="'+cClass+'" style="background:linear-gradient(135deg,#'+cols[0]+',#'+cols[1]+')">' +
+                        cover +
+                        '<span class="status-badge '+a.status+'">'+STATUS_MAP[a.status]+'</span>' +
+                    '</div>' +
+                    '<div class="anime-body">' +
+                        '<h4>'+escHtml(a.name)+'</h4>' +
+                        '<div class="anime-origin">'+escHtml(a.origin||'—')+'</div>' +
+                        '<div class="anime-comment">'+escHtml(a.comment||'—')+'</div>' +
+                        '<div class="anime-rating">'+stars+'</div>' +
+                    '</div></div>';
+            }).join('');
         }
 
-        function escHtml(str) {
-            if (!str) return '';
-            const d = document.createElement('div');
-            d.textContent = str;
-            return d.innerHTML;
-        }
-
-        // ===== 筛选 =====
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                currentFilter = this.dataset.filter;
-                loadAnime();
-            });
-        });
-
-        // ===== 删除 =====
-        async function deleteAnime(id) {
+        function deleteAnime(i) {
             if (!confirm('确定要删除吗？')) return;
-            try {
-                const res = await fetch('/api/anime/' + id, {
-                    method: 'DELETE',
-                    headers: authHeaders()
-                });
-                if (res.ok) loadAnime();
-                else { const d = await res.json(); alert(d.error || '删除失败'); }
-            } catch { alert('网络错误'); }
+            const list = getAnime(); list.splice(i,1); saveAnime(list); render();
         }
 
-        // ===== 编辑 =====
-        async function editAnime(id) {
-            editingId = id;
-            const res = await fetch('/api/anime');
-            const list = await res.json();
-            const a = list.find(item => item.id === id);
-            if (!a) return;
-
+        function editAnime(i) {
+            editingId = i;
+            const a = getAnime()[i];
             document.getElementById('modalTitle').textContent = '✏️ 编辑番剧';
             document.querySelector('.btn-submit').textContent = '保存';
             document.getElementById('inputName').value = a.name;
-            document.getElementById('inputOrigin').value = a.origin || '';
-            document.getElementById('inputComment').value = a.comment || '';
+            document.getElementById('inputOrigin').value = a.origin||'';
+            document.getElementById('inputComment').value = a.comment||'';
             document.getElementById('inputStatus').value = a.status;
             document.getElementById('inputRating').value = a.rating;
-
             selectedColor = a.color;
-            document.querySelectorAll('#colorOptions button').forEach(b => {
-                b.classList.toggle('selected', b.dataset.color === a.color);
-            });
-
-            coverData = a.cover || null;
-            if (coverData) {
-                document.getElementById('coverPreview').classList.add('has-image');
-                document.getElementById('coverPreviewImg').src = coverData;
-            } else {
-                document.getElementById('coverPreview').classList.remove('has-image');
-                document.getElementById('coverPreviewImg').src = '';
-            }
-
+            document.querySelectorAll('#colorOptions button').forEach(b => b.classList.toggle('selected', b.dataset.color===a.color));
+            coverData = a.cover||null;
+            if (coverData) { document.getElementById('coverPreview').classList.add('has-image'); document.getElementById('coverPreviewImg').src = coverData; }
+            else { document.getElementById('coverPreview').classList.remove('has-image'); document.getElementById('coverPreviewImg').src = ''; }
             document.getElementById('modal').classList.add('open');
         }
 
-        // ===== 弹窗 =====
         function openModal() {
             editingId = null;
             document.getElementById('modalTitle').textContent = '✏️ 添加新番';
@@ -539,97 +295,52 @@
             document.getElementById('inputComment').value = '';
             document.getElementById('inputStatus').value = 'watching';
             document.getElementById('inputRating').value = '5';
-            selectedColor = 'fce4ec,f8bbd0';
-            coverData = null;
+            selectedColor = 'fce4ec,f8bbd0'; coverData = null;
             document.getElementById('coverPreview').classList.remove('has-image');
             document.getElementById('coverPreviewImg').src = '';
             document.getElementById('coverInput').value = '';
             document.querySelectorAll('#colorOptions button').forEach(b => b.classList.remove('selected'));
             document.querySelector('#colorOptions button[data-color="fce4ec,f8bbd0"]').classList.add('selected');
             document.getElementById('modal').classList.add('open');
-            document.getElementById('inputName').focus();
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('open');
-            editingId = null;
-        }
+        function closeModal() { document.getElementById('modal').classList.remove('open'); editingId=null; }
 
-        // 颜色选择
         document.getElementById('colorOptions').addEventListener('click', function(e) {
-            if (e.target.tagName === 'BUTTON') {
-                this.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-                e.target.classList.add('selected');
-                selectedColor = e.target.dataset.color;
-            }
+            if (e.target.tagName==='BUTTON') { this.querySelectorAll('button').forEach(b=>b.classList.remove('selected')); e.target.classList.add('selected'); selectedColor=e.target.dataset.color; }
         });
 
-        // 封面上传
-        document.getElementById('coverInput').addEventListener('change', function(e) {
-            if (e.target.files.length) handleCoverUpload(e.target.files[0]);
-        });
-        document.getElementById('uploadBtnLabel').addEventListener('click', e => {
-            e.preventDefault();
-            document.getElementById('coverInput').click();
-        });
-        document.getElementById('removeCover').addEventListener('click', () => {
-            coverData = null;
-            document.getElementById('coverPreview').classList.remove('has-image');
-            document.getElementById('coverPreviewImg').src = '';
-            document.getElementById('coverInput').value = '';
-        });
-
-        function handleCoverUpload(file) {
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    let w = img.width, h = img.height;
-                    if (w > 300) { h = h * 300 / w; w = 300; }
-                    if (h > 200) { w = w * 200 / h; h = 200; }
-                    const canvas = document.createElement('canvas');
-                    canvas.width = w; canvas.height = h;
-                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                    coverData = canvas.toDataURL('image/jpeg', 0.8);
-                    document.getElementById('coverPreview').classList.add('has-image');
-                    document.getElementById('coverPreviewImg').src = coverData;
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
+        document.getElementById('coverInput').addEventListener('change', function(e) { if(e.target.files.length) uploadCover(e.target.files[0]); });
+        document.getElementById('uploadBtnLabel').addEventListener('click', e=>{ e.preventDefault(); document.getElementById('coverInput').click(); });
+        document.getElementById('removeCover').addEventListener('click', ()=>{ coverData=null; document.getElementById('coverPreview').classList.remove('has-image'); document.getElementById('coverPreviewImg').src=''; document.getElementById('coverInput').value=''; });
+        function uploadCover(file) {
+            if(!file) return;
+            const r=new FileReader();
+            r.onload=function(e){ const img=new Image(); img.onload=function(){ let w=img.width,h=img.height; if(w>300){h=h*300/w;w=300;} if(h>200){w=w*200/h;h=200;} const c=document.createElement('canvas'); c.width=w;c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); coverData=c.toDataURL('image/jpeg',0.8); document.getElementById('coverPreview').classList.add('has-image'); document.getElementById('coverPreviewImg').src=coverData; }; img.src=e.target.result; }; r.readAsDataURL(file);
         }
 
-        // ===== 保存 =====
-        async function saveAnime() {
+        function saveAnime() {
             const name = document.getElementById('inputName').value.trim();
             if (!name) { alert('请输入番剧名称～'); return; }
-
-            const body = {
-                name,
-                origin: document.getElementById('inputOrigin').value.trim(),
-                comment: document.getElementById('inputComment').value.trim(),
-                status: document.getElementById('inputStatus').value,
-                rating: parseInt(document.getElementById('inputRating').value),
-                color: selectedColor,
-                cover: coverData
-            };
-
-            try {
-                const url = editingId ? '/api/anime/' + editingId : '/api/anime';
-                const method = editingId ? 'PUT' : 'POST';
-                const res = await fetch(url, {
-                    method,
-                    headers: authHeaders(),
-                    body: JSON.stringify(body)
-                });
-                if (res.ok) { closeModal(); loadAnime(); }
-                else { const d = await res.json(); alert(d.error || '操作失败'); }
-            } catch { alert('网络错误'); }
+            const list = getAnime();
+            const data = { name, origin: document.getElementById('inputOrigin').value.trim(), comment: document.getElementById('inputComment').value.trim(), status: document.getElementById('inputStatus').value, rating: parseInt(document.getElementById('inputRating').value), color: selectedColor, icon: ICONS[Math.floor(Math.random()*ICONS.length)], cover: coverData };
+            if (editingId !== null) { data.icon = list[editingId].icon; list[editingId] = data; }
+            else { list.push(data); }
+            saveAnime(list); closeModal(); render();
         }
 
-        // ===== 初始化 =====
-        checkAuth().then(() => loadAnime());
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+                this.classList.add('active'); currentFilter=this.dataset.filter; render();
+            });
+        });
+
+        if (isAdmin()) {
+            document.getElementById('btnAdd').classList.remove('hidden');
+            document.getElementById('adminBar').innerHTML = '<span style="color:#10b981">✅ 管理模式</span> <a href="index.html">🏠 返回首页</a>';
+        }
+        render();
     </script>
 </body>
 </html>

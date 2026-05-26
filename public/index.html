@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小葵的博客</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "PingFang SC", sans-serif;
+            background: #f8fafc; color: #1e293b; line-height: 1.8;
+        }
+        header {
+            background: linear-gradient(135deg, #e0f2fe, #ecfeff, #f0f9ff);
+            padding: 60px 24px 48px; text-align: center; position: relative; overflow: hidden;
+        }
+        header::after {
+            content: ''; position: absolute; bottom: -40px; left: 0; width: 100%; height: 80px;
+            background: #f8fafc; border-radius: 50% 50% 0 0;
+        }
+        .avatar {
+            width: 96px; height: 96px; border-radius: 50%;
+            background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 36px; color: #fff;
+            box-shadow: 0 4px 24px rgba(59,130,246,0.3);
+        }
+        header h1 { font-size: 36px; font-weight: 800; color: #1e293b; letter-spacing: -0.5px; }
+        header .bio { color: #64748b; font-size: 16px; margin-top: 8px; }
+        .nav-links { margin-top: 20px; display: flex; justify-content: center; gap: 24px; font-size: 14px; flex-wrap: wrap; }
+        .nav-links a { color: #64748b; text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: #0ea5e9; }
+        .container { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+        .intro {
+            background: #fff; border-radius: 16px; padding: 28px 32px;
+            margin: -16px 0 32px; border: 1px solid #f1f5f9;
+            font-size: 15px; color: #475569;
+        }
+        .intro em { color: #0ea5e9; font-style: normal; font-weight: 600; }
+        .about {
+            background: #fff; border-radius: 16px; padding: 28px 32px; margin: 32px 0;
+            border: 1px solid #f1f5f9;
+        }
+        .section-title {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 20px;
+        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .about-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            background: #f8fafc; border-radius: 10px; font-size: 14px; color: #475569;
+        }
+        .about-item .icon { font-size: 20px; flex-shrink: 0; }
+        .giscus-section {
+            background: #fff; border-radius: 16px; padding: 28px 32px; margin: 32px 0;
+            border: 1px solid #f1f5f9;
+        }
+        footer {
+            text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px;
+        }
+        footer a { color: #0ea5e9; text-decoration: none; }
+        .admin-bar { margin-top: 6px; font-size: 12px; display: flex; justify-content: center; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .admin-bar a { color: #94a3b8; text-decoration: none; }
+        .admin-bar a:hover { color: #0ea5e9; }
+        .admin-bar .badge { color: #10b981; }
+        .gear-btn {
+            background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 16px;
+            transition: all 0.3s; padding: 2px 6px; border-radius: 6px;
+        }
+        .gear-btn:hover { color: #0ea5e9; background: #f1f5f9; transform: rotate(30deg); }
+        @media (max-width: 600px) {
+            header { padding: 40px 16px 36px; }
+            header h1 { font-size: 28px; }
+            .intro, .about, .giscus-section { padding: 20px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="avatar">🌻</div>
+        <h1>小葵</h1>
+        <p class="bio">二次元爱好者 / 追番中的小葵 🌻</p>
+        <div class="nav-links">
+            <a href="posts.html">📝 文章</a>
+            <a href="anime.html">🎬 追番</a>
+            <a href="#">📖 关于</a>
+            <a href="https://github.com/xiaokuiizumi" target="_blank">🐙 GitHub</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            👋 你好呀！我是 <em>小葵</em>，热爱二次元 🎀，是个不折不扣的动漫爱好者。
+            最喜欢的作品有 <em>幸运星</em>、<em>轻音少女</em>、<em>琉璃龙龙</em> 等～
+        </div>
+
+        <div class="about">
+            <div class="section-title">🌻 关于小葵</div>
+            <div class="about-grid">
+                <div class="about-item"><span class="icon">💼</span><span>自由职业 / 摸鱼中</span></div>
+                <div class="about-item"><span class="icon">🎨</span><span>资深二次元 / 追番狂魔</span></div>
+                <div class="about-item"><span class="icon">☕</span><span>咖啡因依赖患者</span></div>
+                <div class="about-item"><span class="icon">🐱</span><span>家里有两只猫 🐈🐈</span></div>
+                <div class="about-item"><span class="icon">📧</span><span>xiaokui@example.com</span></div>
+                <div class="about-item"><span class="icon">🌏</span><span>深圳 · 晴天</span></div>
+            </div>
+        </div>
+
+        <div class="giscus-section">
+            <div class="section-title">💬 留言板</div>
+            <div id="giscus-placeholder">
+                <p style="color:#94a3b8;font-size:14px;text-align:center;">留言功能加载中…</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 小葵的博客 · Powered by 🌻</p>
+        <div class="admin-bar">
+            <span id="adminStatus"></span>
+            <button class="gear-btn" id="gearBtn" title="管理">⚙️</button>
+        </div>
+    </footer>
+
+    <script>
+        const ADMIN_PASSWORD = '葵葵2026';
+
+        // ===== 管理模式 =====
+        function isAdmin() { return localStorage.getItem('xiaokui_admin') === 'true'; }
+
+        function updateAdminUI() {
+            const el = document.getElementById('adminStatus');
+            if (isAdmin()) {
+                el.innerHTML = '<span class="badge">✅ 管理模式</span> <a href="#" onclick="logoutAdmin();return false">退出</a>';
+            } else {
+                el.textContent = '';
+            }
+        }
+
+        function loginAdmin() {
+            const pwd = prompt('请输入管理员密码：');
+            if (pwd === ADMIN_PASSWORD) {
+                localStorage.setItem('xiaokui_admin', 'true');
+                updateAdminUI();
+                location.reload();
+            } else if (pwd !== null) {
+                alert('密码错误');
+            }
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('xiaokui_admin');
+            location.reload();
+        }
+
+        document.getElementById('gearBtn').addEventListener('click', () => {
+            if (isAdmin()) logoutAdmin(); else loginAdmin();
+        });
+
+        updateAdminUI();
+
+        // ===== Giscus =====
+        // 以下三个值需要去 https://giscus.app 配置后替换
+        const GISCUS_REPO = 'xiaokuiizumi/xiaokui-blog';
+        const GISCUS_REPO_ID = '';   // ← 从 giscus.app 获取
+        const GISCUS_CATEGORY_ID = ''; // ← 从 giscus.app 获取
+
+        function loadGiscus() {
+            if (!GISCUS_REPO_ID || !GISCUS_CATEGORY_ID) {
+                document.getElementById('giscus-placeholder').innerHTML =
+                    '<p style="color:#94a3b8;font-size:14px;text-align:center;">📌 请先配置 Giscus（见底部说明）</p>';
+                return;
+            }
+            const script = document.createElement('script');
+            script.src = 'https://giscus.app/client.js';
+            script.setAttribute('data-repo', GISCUS_REPO);
+            script.setAttribute('data-repo-id', GISCUS_REPO_ID);
+            script.setAttribute('data-category', 'Announcements');
+            script.setAttribute('data-category-id', GISCUS_CATEGORY_ID);
+            script.setAttribute('data-mapping', 'pathname');
+            script.setAttribute('data-strict', '0');
+            script.setAttribute('data-reactions-enabled', '1');
+            script.setAttribute('data-emit-metadata', '0');
+            script.setAttribute('data-theme', 'light');
+            script.setAttribute('data-lang', 'zh-CN');
+            script.setAttribute('crossorigin', 'anonymous');
+            script.async = true;
+            document.getElementById('giscus-placeholder').appendChild(script);
+        }
+        loadGiscus();
+    </script>
+</body>
+</html>
