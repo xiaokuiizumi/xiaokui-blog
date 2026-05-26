@@ -68,15 +68,6 @@
             text-align: center; padding: 40px 24px 28px; color: #94a3b8; font-size: 13px;
         }
         footer a { color: #0ea5e9; text-decoration: none; }
-        .admin-bar { margin-top: 6px; font-size: 12px; display: flex; justify-content: center; gap: 12px; align-items: center; flex-wrap: wrap; }
-        .admin-bar a { color: #94a3b8; text-decoration: none; }
-        .admin-bar a:hover { color: #0ea5e9; }
-        .admin-bar .badge { color: #10b981; }
-        .gear-btn {
-            background: none; border: none; color: #cbd5e1; cursor: pointer; font-size: 16px;
-            transition: all 0.3s; padding: 2px 6px; border-radius: 6px;
-        }
-        .gear-btn:hover { color: #0ea5e9; background: #f1f5f9; transform: rotate(30deg); }
         @media (max-width: 600px) {
             header { padding: 40px 16px 36px; }
             header h1 { font-size: 28px; }
@@ -132,51 +123,10 @@
 
     <footer>
         <p>© 2026 小葵的博客 · Powered by 🌻</p>
-        <div class="admin-bar">
-            <span id="adminStatus"></span>
-            <button class="gear-btn" id="gearBtn" title="管理">⚙️</button>
-        </div>
     </footer>
 
     <script>
-        const ADMIN_PASSWORD = '葵葵2026';
-
-        // ===== 管理模式 =====
-        function isAdmin() { return localStorage.getItem('xiaokui_admin') === 'true'; }
-
-        function updateAdminUI() {
-            const el = document.getElementById('adminStatus');
-            if (isAdmin()) {
-                el.innerHTML = '<span class="badge">✅ 管理模式</span> <a href="#" onclick="logoutAdmin();return false">退出</a>';
-            } else {
-                el.textContent = '';
-            }
-        }
-
-        function loginAdmin() {
-            const pwd = prompt('请输入管理员密码：');
-            if (pwd === ADMIN_PASSWORD) {
-                localStorage.setItem('xiaokui_admin', 'true');
-                updateAdminUI();
-                location.reload();
-            } else if (pwd !== null) {
-                alert('密码错误');
-            }
-        }
-
-        function logoutAdmin() {
-            localStorage.removeItem('xiaokui_admin');
-            location.reload();
-        }
-
-        document.getElementById('gearBtn').addEventListener('click', () => {
-            if (isAdmin()) logoutAdmin(); else loginAdmin();
-        });
-
-        updateAdminUI();
-
         // ===== Giscus =====
-        // 以下三个值需要去 https://giscus.app 配置后替换
         const GISCUS_REPO = 'xiaokuiizumi/xiaokui-blog';
         const GISCUS_REPO_ID = 'R_kgDOSoW0Fg';   // ← 从 giscus.app 获取
         const GISCUS_CATEGORY_ID = 'DIC_kwDOSoW0Fs4C94T_'; // ← 从 giscus.app 获取
